@@ -2,12 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sibcode_test/widgets/news_list/news_list_widget_model.dart';
 
-class NewsListWidget extends StatelessWidget {
+class NewsListWidget extends StatefulWidget {
   const NewsListWidget({super.key});
 
   @override
+  State<NewsListWidget> createState() => _NewsListWidgetState();
+}
+
+class _NewsListWidgetState extends State<NewsListWidget> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() => context.read<NewsListWidgetModel>().loadNews());
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final newsProvider = Provider.of<NewsListWidgetModel>(context);
+    final newsProvider = Provider.of<NewsListWidgetModel>(context).newsList;
     return Scaffold(
       appBar: AppBar(
         title: IconButton(
@@ -16,41 +27,55 @@ class NewsListWidget extends StatelessWidget {
         ),
       ),
       body: ListView.builder(
-          padding: const EdgeInsets.only(left: 16, right: 18),
-          itemExtent: 277,
-          itemCount: 5,
+          padding: const EdgeInsets.only(left: 16, right: 18, bottom: 21),
+          itemExtent: 300,
+          itemCount: newsProvider.length,
           itemBuilder: (BuildContext context, int index) {
-            return Stack(
-              clipBehavior: Clip.hardEdge,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      '10.05.2023',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    Image.network(
-                      'https://webstripe.ru/upload/resize_cache/webp/iblock/adf/l1wj3m728itvinqpxmexcy4npleflcx6/Frame-7.webp',
-                    ),
-                    const Text(
-                      'Зачем продлять лицензию 1С-Битрикс',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    const SizedBox(
-                      height: 21,
-                    ),
-                  ],
-                ),
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: () => newsProvider.getHttp(),
-                  ),
-                ),
-              ],
-            );
+            return _NewsListRowWidget(index: index);
           }),
+    );
+  }
+}
+
+class _NewsListRowWidget extends StatelessWidget {
+  const _NewsListRowWidget({
+    super.key,
+    required this.index,
+  });
+
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    final newsProvider = Provider.of<NewsListWidgetModel>(context).newsList;
+    final news = newsProvider[index];
+    return Stack(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              news.date,
+              style: const TextStyle(color: Colors.grey, fontSize: 14),
+            ),
+            Image.network(
+              'https://webstripe.ru/upload/resize_cache/webp/iblock/adf/l1wj3m728itvinqpxmexcy4npleflcx6/Frame-7.webp',
+            ),
+            const SizedBox(height: 6),
+            Expanded(
+              child: Text(
+                news.name,
+                style: const TextStyle(fontSize: 14),
+              ),
+            ),
+            const SizedBox(height: 21),
+          ],
+        ),
+        Material(
+          color: Colors.transparent,
+          child: InkWell(onTap: () {}),
+        ),
+      ],
     );
   }
 }
