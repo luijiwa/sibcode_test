@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sibcode_test/domain/api_service.dart';
 import 'package:sibcode_test/domain/entity/news_answer.dart';
+import 'package:sibcode_test/domain/services/api_service.dart';
 
 class NewsListWidgetModel extends ChangeNotifier {
   List<News> _newsList = [];
