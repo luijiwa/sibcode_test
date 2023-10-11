@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:sibcode_test/widgets/auth_widget/auth_widget.dart';
+import 'package:sibcode_test/widgets/routing/app_router.dart';
 
-import '../loading_widget/loading_widget.dart';
-
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    final router = AppRouter().router;
+
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const AuthWidget(),
+      routerConfig: router,
     );
   }
 }
