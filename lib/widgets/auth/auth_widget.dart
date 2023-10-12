@@ -8,7 +8,7 @@ class AuthWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthWidgetModel>(context);
-    final TextEditingController _telController = TextEditingController();
+    final TextEditingController telController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
           //   icon: const Icon(Icons.arrow_back_ios),
@@ -29,7 +29,7 @@ class AuthWidget extends StatelessWidget {
                 style: const TextStyle(color: Colors.red),
               ),
             TextField(
-              controller: _telController,
+              controller: telController,
               decoration: const InputDecoration(
                 filled: true,
                 fillColor: Color.fromRGBO(241, 241, 241, 1),
@@ -39,7 +39,7 @@ class AuthWidget extends StatelessWidget {
             const SizedBox(height: 40),
             ElevatedButton(
                 onPressed: () => authProvider.validAndNavigation(
-                    _telController.text, context),
+                    telController.text, context),
                 style: const ButtonStyle(),
                 child: const Text('Вход')),
           ],
