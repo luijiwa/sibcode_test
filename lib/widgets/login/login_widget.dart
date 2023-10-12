@@ -22,6 +22,10 @@ class _LoginWidgetState extends State<LoginWidget> {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<LoginWidgetModel>(context);
     final tel = context.read<LoginWidgetModel>().tel;
+    const TextStyle textStyle = TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w400,
+    );
     return Scaffold(
       appBar: AppBar(
           //   icon: const Icon(Icons.arrow_back_ios),
@@ -32,9 +36,20 @@ class _LoginWidgetState extends State<LoginWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Номер телефона'),
+            const Text(
+              'Номер телефона',
+              style: textStyle,
+            ),
             const SizedBox(height: 10),
-            Text(tel),
+            Container(
+              color: Colors.grey[300],
+              padding: const EdgeInsets.all(5),
+              width: double.infinity,
+              child: Text(
+                tel,
+                style: textStyle,
+              ),
+            ),
             // Color.fromRGBO(241, 241, 241, 1)
             const SizedBox(height: 40),
             ElevatedButton(
