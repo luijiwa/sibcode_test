@@ -24,12 +24,14 @@ class NewsDetailsWidget extends StatelessWidget {
               news.date,
               style: const TextStyle(color: Colors.grey),
             ),
-            Image.network(
-                'https://webstripe.ru/upload/resize_cache/webp/iblock/adf/l1wj3m728itvinqpxmexcy4npleflcx6/Frame-7.webp'),
+            Image.network(news.image),
             const SizedBox(height: 7),
             Text(
               news.name,
-              style: const TextStyle(fontSize: 18),
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+              ),
             ),
             const SizedBox(height: 18),
             Text(

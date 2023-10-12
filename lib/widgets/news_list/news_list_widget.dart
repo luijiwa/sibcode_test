@@ -34,7 +34,7 @@ class _NewsListWidgetState extends State<NewsListWidget> {
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               padding: const EdgeInsets.only(left: 16, right: 18, bottom: 21),
-              itemExtent: 300,
+              itemExtent: 250,
               itemCount: newsProvider.length,
               itemBuilder: (BuildContext context, int index) {
                 return _NewsListRowWidget(index: index);
@@ -45,7 +45,6 @@ class _NewsListWidgetState extends State<NewsListWidget> {
 
 class _NewsListRowWidget extends StatelessWidget {
   const _NewsListRowWidget({
-    super.key,
     required this.index,
   });
 
@@ -65,7 +64,7 @@ class _NewsListRowWidget extends StatelessWidget {
               style: const TextStyle(color: Colors.grey, fontSize: 14),
             ),
             Image.network(
-              'https://webstripe.ru/upload/resize_cache/webp/iblock/adf/l1wj3m728itvinqpxmexcy4npleflcx6/Frame-7.webp',
+              news.image,
             ),
             const SizedBox(height: 6),
             Expanded(
