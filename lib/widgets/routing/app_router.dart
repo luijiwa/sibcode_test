@@ -12,29 +12,64 @@ import 'package:sibcode_test/widgets/news_details/news_details.dart';
 import 'package:sibcode_test/widgets/news_list/news_list_widget.dart';
 import 'package:sibcode_test/widgets/news_list/news_list_widget_model.dart';
 
+enum AppRoutes {
+  loading(
+    name: 'loading',
+    path: '/loading',
+  ),
+  main(
+    name: 'main',
+    path: '/',
+  ),
+  login(
+    name: 'login',
+    path: 'login',
+  ),
+  details(
+    name: 'details',
+    path: 'details',
+  ),
+  auth(
+    name: 'auth',
+    path: 'auth',
+  ),
+  ;
+
+  const AppRoutes({
+    required this.name,
+    required this.path,
+  });
+
+  final String name;
+  final String path;
+
+  @override
+  String toString() => name;
+}
+
 class AppRouter {
   late final router = GoRouter(
-    initialLocation: '/loading',
+    initialLocation: AppRoutes.loading.path,
     routes: <GoRoute>[
       GoRoute(
-        name: '/',
-        path: '/',
+        name: AppRoutes.main.name,
+        path: AppRoutes.main.path,
         builder: (BuildContext context, GoRouterState state) =>
             ChangeNotifierProvider(
                 create: (BuildContext context) => NewsListWidgetModel(),
                 child: const NewsListWidget()),
         routes: <GoRoute>[
           GoRoute(
-            name: 'login',
-            path: 'login',
+            name: AppRoutes.login.name,
+            path: AppRoutes.login.path,
             builder: (context, state) => ChangeNotifierProvider(
               create: (BuildContext context) => LoginWidgetModel(),
               child: const LoginWidget(),
             ),
           ),
           GoRoute(
-            name: 'details',
-            path: 'details',
+            name: AppRoutes.details.name,
+            path: AppRoutes.details.path,
             builder: (BuildContext context, GoRouterState state) {
               final news = state.extra as News;
               return NewsDetailsWidget(
@@ -45,15 +80,15 @@ class AppRouter {
         ],
       ),
       GoRoute(
-        path: '/loading',
-        name: 'loading',
+        name: AppRoutes.loading.name,
+        path: AppRoutes.loading.path,
         builder: (context, state) => ChangeNotifierProvider(
             create: (BuildContext context) => LoadingWidgetModel(),
             child: const LoadingWidget()),
         routes: <GoRoute>[
           GoRoute(
-            name: 'auth',
-            path: 'auth',
+            name: AppRoutes.auth.name,
+            path: AppRoutes.auth.path,
             builder: (context, state) => ChangeNotifierProvider(
                 create: (BuildContext context) => AuthWidgetModel(),
                 child: const AuthWidget()),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:sibcode_test/widgets/news_list/news_list_widget_model.dart';
+import 'package:sibcode_test/widgets/routing/app_router.dart';
 
 class NewsListWidget extends StatefulWidget {
   const NewsListWidget({super.key});
@@ -81,7 +82,7 @@ class _NewsListRowWidget extends StatelessWidget {
           child: InkWell(
             onTap: () {
               context.goNamed(
-                'details',
+                AppRoutes.details.name,
                 extra: newsProvider[1],
               );
             },

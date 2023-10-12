@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sibcode_test/domain/services/auth_service.dart';
+import 'package:sibcode_test/widgets/routing/app_router.dart';
 
 class LoginWidgetModel extends ChangeNotifier {
   LoginWidgetModel() {
@@ -17,7 +18,7 @@ class LoginWidgetModel extends ChangeNotifier {
 
   void resetAuth(BuildContext context) {
     authService.deleteAuthState();
-    context.goNamed('loading');
+    context.goNamed(AppRoutes.loading.name);
     notifyListeners();
   }
 }

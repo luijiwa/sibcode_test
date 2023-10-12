@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:sibcode_test/widgets/loader_widget/loading_widget_model.dart';
+import 'package:sibcode_test/widgets/routing/app_router.dart';
 
 class LoadingWidget extends StatefulWidget {
   const LoadingWidget({super.key});
@@ -18,11 +19,14 @@ class _LoadingWidgetState extends State<LoadingWidget> {
     super.initState();
     Future.microtask(
         () => context.read<LoadingWidgetModel>().ensureAuthentication());
-    Timer(const Duration(seconds: 3), () {
+    Timer(
+        const Duration(
+          seconds: 1,
+        ), () {
       if (mounted) {
         Provider.of<LoadingWidgetModel>(context, listen: false).isAuth
-            ? context.goNamed('/')
-            : context.goNamed('auth');
+            ? context.goNamed(AppRoutes.main.name)
+            : context.goNamed(AppRoutes.auth.name);
       }
     });
   }
