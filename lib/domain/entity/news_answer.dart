@@ -1,5 +1,9 @@
 import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'news_answer.g.dart';
+
+@JsonSerializable()
 class News {
   final String id;
   final String name;
@@ -14,16 +18,6 @@ class News {
     this.description,
   });
 
-//
-  factory News.fromMap(Map<String, dynamic> map) {
-    return News(
-      id: map['id'] ?? '',
-      name: map['name'] ?? '',
-      image: map['image'] ?? '',
-      date: map['date'] ?? '',
-      description: map['description'] ?? '',
-    );
-  }
-
-  factory News.fromJson(String source) => News.fromMap(json.decode(source));
+  factory News.fromJson(Map<String, dynamic> json) => _$NewsFromJson(json);
+  Map<String, dynamic> toJson() => _$NewsToJson(this);
 }

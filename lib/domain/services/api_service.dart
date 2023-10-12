@@ -11,7 +11,7 @@ class ApiService {
     if (response.statusCode == 200) {
       final List<dynamic> data = response.data['news'];
       final List<News> newsList =
-          data.map((json) => News.fromMap(json)).toList();
+          data.map((json) => News.fromJson(json)).toList();
       return newsList;
     } else {
       throw Exception('Ошибка при загрузке новостей');
